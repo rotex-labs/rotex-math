@@ -1,0 +1,7 @@
+[package]
+name = "rotex-color"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+rotex-math = { version = "0.1.0", path = "../rotex-math" }
