@@ -14,11 +14,41 @@ impl Cmyka {
         Self { c, m, y, k, a }
     }
 
-    pub const CYAN: Self = Self { c: 1.0, m: 0.0, y: 0.0, k: 0.0, a: 1.0 };
-    pub const MAGENTA: Self = Self { c: 0.0, m: 1.0, y: 0.0, k: 0.0, a: 1.0 };
-    pub const YELLOW: Self = Self { c: 0.0, m: 0.0, y: 1.0, k: 0.0, a: 1.0 };
-    pub const BLACK: Self = Self { c: 0.0, m: 0.0, y: 0.0, k: 1.0, a: 1.0 };
-    pub const WHITE: Self = Self { c: 0.0, m: 0.0, y: 0.0, k: 0.0, a: 1.0 };
+    pub const CYAN: Self = Self {
+        c: 1.0,
+        m: 0.0,
+        y: 0.0,
+        k: 0.0,
+        a: 1.0,
+    };
+    pub const MAGENTA: Self = Self {
+        c: 0.0,
+        m: 1.0,
+        y: 0.0,
+        k: 0.0,
+        a: 1.0,
+    };
+    pub const YELLOW: Self = Self {
+        c: 0.0,
+        m: 0.0,
+        y: 1.0,
+        k: 0.0,
+        a: 1.0,
+    };
+    pub const BLACK: Self = Self {
+        c: 0.0,
+        m: 0.0,
+        y: 0.0,
+        k: 1.0,
+        a: 1.0,
+    };
+    pub const WHITE: Self = Self {
+        c: 0.0,
+        m: 0.0,
+        y: 0.0,
+        k: 0.0,
+        a: 1.0,
+    };
 }
 
 impl Default for Cmyka {
