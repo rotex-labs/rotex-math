@@ -1,5 +1,5 @@
-use crate::geometry::Aabb;
 use crate::frustum::Frustum;
+use crate::geometry::Aabb;
 use wide::f32x8;
 
 #[target_feature(enable = "avx2")]
@@ -8,8 +8,12 @@ unsafe fn contains_aabb_batch_impl(frustum: &Frustum, aabbs: &[Aabb], out: &mut 
 
     let mut i = 0;
     while i + 8 <= aabbs.len() {
-        let mut mx = [0.0; 8]; let mut my = [0.0; 8]; let mut mz = [0.0; 8];
-        let mut kx = [0.0; 8]; let mut ky = [0.0; 8]; let mut kz = [0.0; 8];
+        let mut mx = [0.0; 8];
+        let mut my = [0.0; 8];
+        let mut mz = [0.0; 8];
+        let mut kx = [0.0; 8];
+        let mut ky = [0.0; 8];
+        let mut kz = [0.0; 8];
 
         for j in 0..8 {
             mx[j] = aabbs[i + j].min.x;

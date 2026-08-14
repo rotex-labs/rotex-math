@@ -52,28 +52,12 @@ pub use glam;
 ///
 /// All types link to their upstream [`glam`] documentation for full method lists.
 pub use glam::{
-    Vec2, Vec3, Vec3A, Vec4,
-    Mat2, Mat3, Mat3A, Mat4,
-    Quat,
-    Affine2, Affine3, Affine3A,
-    DVec2, DVec3, DVec4,
-    DMat2, DMat3, DMat4,
-    DQuat,
-    DAffine2, DAffine3,
-    I8Vec2, I8Vec3, I8Vec4,
-    I16Vec2, I16Vec3, I16Vec4,
-    IVec2, IVec3, IVec4,
-    I64Vec2, I64Vec3, I64Vec4,
-    ISizeVec2, ISizeVec3, ISizeVec4,
-    U8Vec2, U8Vec3, U8Vec4,
-    U16Vec2, U16Vec3, U16Vec4,
-    UVec2, UVec3, UVec4,
-    U64Vec2, U64Vec3, U64Vec4,
-    USizeVec2, USizeVec3, USizeVec4,
-    BVec2, BVec3, BVec4,
-    EulerRot,
-    FloatExt,
-    Vec2Swizzles, Vec3Swizzles, Vec4Swizzles,
+    Affine2, Affine3, Affine3A, BVec2, BVec3, BVec4, DAffine2, DAffine3, DMat2, DMat3, DMat4,
+    DQuat, DVec2, DVec3, DVec4, EulerRot, FloatExt, I8Vec2, I8Vec3, I8Vec4, I16Vec2, I16Vec3,
+    I16Vec4, I64Vec2, I64Vec3, I64Vec4, ISizeVec2, ISizeVec3, ISizeVec4, IVec2, IVec3, IVec4, Mat2,
+    Mat3, Mat3A, Mat4, Quat, U8Vec2, U8Vec3, U8Vec4, U16Vec2, U16Vec3, U16Vec4, U64Vec2, U64Vec3,
+    U64Vec4, USizeVec2, USizeVec3, USizeVec4, UVec2, UVec3, UVec4, Vec2, Vec2Swizzles, Vec3, Vec3A,
+    Vec3Swizzles, Vec4, Vec4Swizzles,
 };
 
 /// Spatial primitives: bounding boxes, rays, and line segments.
@@ -85,5 +69,5 @@ pub mod frustum;
 /// SIMD-batched frustum culling (requires `wide-simd` feature).
 pub mod wide_simd;
 
-pub use geometry::{Aabb, Aabb2, LineSegment2D, LineSegment3D, Ray2D, Ray3D};
 pub use frustum::{Frustum, Plane};
+pub use geometry::{Aabb, Aabb2, LineSegment2D, LineSegment3D, Ray2D, Ray3D};

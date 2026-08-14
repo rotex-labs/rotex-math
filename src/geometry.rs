@@ -161,7 +161,11 @@ impl Aabb {
         let t2 = (self.max - ray.origin) * inv_dir;
         let t_min = t1.min(t2).max_element();
         let t_max = t1.max(t2).min_element();
-        if t_max < 0.0 || t_min > t_max { None } else { Some(t_min) }
+        if t_max < 0.0 || t_min > t_max {
+            None
+        } else {
+            Some(t_min)
+        }
     }
 }
 
@@ -229,7 +233,11 @@ impl Aabb2 {
         let t2 = (self.max - ray.origin) * inv_dir;
         let t_min = t1.min(t2).max_element();
         let t_max = t1.max(t2).min_element();
-        if t_max < 0.0 || t_min > t_max { None } else { Some(t_min) }
+        if t_max < 0.0 || t_min > t_max {
+            None
+        } else {
+            Some(t_min)
+        }
     }
 }
 

@@ -1,10 +1,10 @@
 mod common;
 
 use common::*;
-use rotex_math::Vec3;
 use proptest::prelude::*;
-use rotex_math::geometry::*;
+use rotex_math::Vec3;
 use rotex_math::frustum::Plane;
+use rotex_math::geometry::*;
 
 proptest! {
     #[test]

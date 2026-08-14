@@ -140,12 +140,32 @@ impl Frustum {
     pub fn from_view_proj_vk(vp: Mat4) -> Self {
         Self {
             planes: [
-                Plane::new(vp.row(3).truncate() + vp.row(0).truncate(), vp.row(3).w + vp.row(0).w).normalize(),
-                Plane::new(vp.row(3).truncate() - vp.row(0).truncate(), vp.row(3).w - vp.row(0).w).normalize(),
-                Plane::new(vp.row(3).truncate() + vp.row(1).truncate(), vp.row(3).w + vp.row(1).w).normalize(),
-                Plane::new(vp.row(3).truncate() - vp.row(1).truncate(), vp.row(3).w - vp.row(1).w).normalize(),
+                Plane::new(
+                    vp.row(3).truncate() + vp.row(0).truncate(),
+                    vp.row(3).w + vp.row(0).w,
+                )
+                .normalize(),
+                Plane::new(
+                    vp.row(3).truncate() - vp.row(0).truncate(),
+                    vp.row(3).w - vp.row(0).w,
+                )
+                .normalize(),
+                Plane::new(
+                    vp.row(3).truncate() + vp.row(1).truncate(),
+                    vp.row(3).w + vp.row(1).w,
+                )
+                .normalize(),
+                Plane::new(
+                    vp.row(3).truncate() - vp.row(1).truncate(),
+                    vp.row(3).w - vp.row(1).w,
+                )
+                .normalize(),
                 Plane::new(vp.row(2).truncate(), vp.row(2).w).normalize(),
-                Plane::new(vp.row(3).truncate() - vp.row(2).truncate(), vp.row(3).w - vp.row(2).w).normalize(),
+                Plane::new(
+                    vp.row(3).truncate() - vp.row(2).truncate(),
+                    vp.row(3).w - vp.row(2).w,
+                )
+                .normalize(),
             ],
         }
     }
@@ -179,9 +199,15 @@ impl Frustum {
     pub fn contains_aabb(&self, aabb: &Aabb) -> bool {
         for plane in &self.planes {
             let mut p = aabb.min;
-            if plane.normal.x >= 0.0 { p.x = aabb.max.x; }
-            if plane.normal.y >= 0.0 { p.y = aabb.max.y; }
-            if plane.normal.z >= 0.0 { p.z = aabb.max.z; }
+            if plane.normal.x >= 0.0 {
+                p.x = aabb.max.x;
+            }
+            if plane.normal.y >= 0.0 {
+                p.y = aabb.max.y;
+            }
+            if plane.normal.z >= 0.0 {
+                p.z = aabb.max.z;
+            }
             if plane.distance_to_point(p) < 0.0 {
                 return false;
             }

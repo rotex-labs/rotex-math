@@ -1,5 +1,5 @@
-use crate::geometry::Aabb;
 use crate::frustum::Frustum;
+use crate::geometry::Aabb;
 use wide::f32x4;
 
 /// 4-wide SIMD batch AABB-frustum culling.
@@ -20,22 +20,40 @@ pub fn contains_aabb_batch(frustum: &Frustum, aabbs: &[Aabb], out: &mut [bool]) 
     let mut i = 0;
     while i + 4 <= aabbs.len() {
         let mx = [
-            aabbs[i].min.x, aabbs[i + 1].min.x, aabbs[i + 2].min.x, aabbs[i + 3].min.x,
+            aabbs[i].min.x,
+            aabbs[i + 1].min.x,
+            aabbs[i + 2].min.x,
+            aabbs[i + 3].min.x,
         ];
         let my = [
-            aabbs[i].min.y, aabbs[i + 1].min.y, aabbs[i + 2].min.y, aabbs[i + 3].min.y,
+            aabbs[i].min.y,
+            aabbs[i + 1].min.y,
+            aabbs[i + 2].min.y,
+            aabbs[i + 3].min.y,
         ];
         let mz = [
-            aabbs[i].min.z, aabbs[i + 1].min.z, aabbs[i + 2].min.z, aabbs[i + 3].min.z,
+            aabbs[i].min.z,
+            aabbs[i + 1].min.z,
+            aabbs[i + 2].min.z,
+            aabbs[i + 3].min.z,
         ];
         let kx = [
-            aabbs[i].max.x, aabbs[i + 1].max.x, aabbs[i + 2].max.x, aabbs[i + 3].max.x,
+            aabbs[i].max.x,
+            aabbs[i + 1].max.x,
+            aabbs[i + 2].max.x,
+            aabbs[i + 3].max.x,
         ];
         let ky = [
-            aabbs[i].max.y, aabbs[i + 1].max.y, aabbs[i + 2].max.y, aabbs[i + 3].max.y,
+            aabbs[i].max.y,
+            aabbs[i + 1].max.y,
+            aabbs[i + 2].max.y,
+            aabbs[i + 3].max.y,
         ];
         let kz = [
-            aabbs[i].max.z, aabbs[i + 1].max.z, aabbs[i + 2].max.z, aabbs[i + 3].max.z,
+            aabbs[i].max.z,
+            aabbs[i + 1].max.z,
+            aabbs[i + 2].max.z,
+            aabbs[i + 3].max.z,
         ];
 
         let min_x = f32x4::new(mx);

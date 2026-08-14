@@ -1,10 +1,10 @@
-use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
-use rotex_math::{Mat4, Vec3};
-use rand::rngs::StdRng;
+use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use rand::RngExt;
 use rand::SeedableRng;
-use rotex_math::geometry::Aabb;
+use rand::rngs::StdRng;
 use rotex_math::frustum::Frustum;
+use rotex_math::geometry::Aabb;
+use rotex_math::{Mat4, Vec3};
 use std::hint::black_box;
 
 const COUNTS: &[usize] = &[8, 16, 64, 256, 512, 1024, 2048, 4096, 8192, 65536];
@@ -38,7 +38,8 @@ fn bench_frustum_culling(c: &mut Criterion) {
         let aabbs = generate_stub_aabbs(count, 42);
         group.bench_with_input(BenchmarkId::from_parameter(count), &aabbs, |b, aabbs| {
             b.iter(|| {
-                aabbs.iter()
+                aabbs
+                    .iter()
                     .map(|a| frustum.contains_aabb(black_box(a)))
                     .collect::<Vec<_>>()
             });
