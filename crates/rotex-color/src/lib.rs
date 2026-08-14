@@ -1,3 +1,5 @@
+#![allow(clippy::excessive_precision)]
+
 pub mod cmyka;
 pub mod hsva;
 pub mod linear_rgba;
