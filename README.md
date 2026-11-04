@@ -24,10 +24,6 @@ None.
 
 Version 0.1.0. Without `wide-simd` the only math dependency is glam.
 
-## Part of Rotex
-
-Rotex is a graphics HAL workspace. See [rotex-dev](https://github.com/rotex-labs/rotex-dev) for the architecture and the other crates.
-
 ## License
 
 Licensed under either of
