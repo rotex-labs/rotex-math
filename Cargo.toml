@@ -2,7 +2,7 @@
 name = "rotex-math"
 version = "0.1.0"
 edition = "2024"
-license = "MIT"
+license = "MIT OR Apache-2.0"
 description = "Mathematical utilities for rotexengine development"
 repository = "https://github.com/rotexengine/rotex-math.git"
 
