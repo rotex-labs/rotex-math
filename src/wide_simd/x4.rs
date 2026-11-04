@@ -72,9 +72,9 @@ pub fn contains_aabb_batch(frustum: &Frustum, aabbs: &[Aabb], out: &mut [bool]) 
             let nz = f32x4::splat(plane.normal.z);
             let d = f32x4::splat(plane.distance);
 
-            let px = nx.simd_ge(zero).blend(max_x, min_x);
-            let py = ny.simd_ge(zero).blend(max_y, min_y);
-            let pz = nz.simd_ge(zero).blend(max_z, min_z);
+            let px = nx.simd_ge(zero).select(max_x, min_x);
+            let py = ny.simd_ge(zero).select(max_y, min_y);
+            let pz = nz.simd_ge(zero).select(max_z, min_z);
 
             let dist = nx * px + ny * py + nz * pz + d;
             inside &= dist.simd_ge(zero);
