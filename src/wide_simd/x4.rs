@@ -77,7 +77,7 @@ pub fn contains_aabb_batch(frustum: &Frustum, aabbs: &[Aabb], out: &mut [bool]) 
             let pz = nz.simd_ge(zero).blend(max_z, min_z);
 
             let dist = nx * px + ny * py + nz * pz + d;
-            inside = inside & dist.simd_ge(zero);
+            inside &= dist.simd_ge(zero);
         }
 
         let mask = inside.to_bitmask();
