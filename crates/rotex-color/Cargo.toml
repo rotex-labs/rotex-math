@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 description = "Color space types and conversions for Rotex"
-repository = "https://github.com/rotexengine/rotex-color"
+repository = "https://github.com/rotex-labs/rotex-color"
 
 [dependencies]
 rotex-math = "0.1.0"
