@@ -6,9 +6,8 @@
 //!
 //! # Feature flags
 //!
-//! * `wide-simd` — Enables SIMD-batched frustum culling via the
-//!   [`ultraviolet`] and [`wide`] crates. Without this feature the crate has
-//!   zero additional dependencies beyond `glam`.
+//! * `wide-simd` — Enables SIMD-batched frustum culling via the `wide` crate.
+//!   Without this feature the crate has no dependencies beyond `glam`.
 //!
 //! # Examples
 //!
