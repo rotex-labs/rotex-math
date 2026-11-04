@@ -2,9 +2,10 @@ use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
 use rand::RngExt;
 use rand::SeedableRng;
 use rand::rngs::StdRng;
+use rotex_math::Vec3;
 use rotex_math::frustum::Frustum;
 use rotex_math::geometry::Aabb;
-use rotex_math::{Mat4, Vec3};
+use rotex_math::glam::camera::rh::{proj::opengl, view};
 use std::hint::black_box;
 
 const COUNTS: &[usize] = &[8, 16, 64, 256, 512, 1024, 2048, 4096, 8192, 65536];
@@ -25,8 +26,8 @@ fn generate_stub_aabbs(count: usize, seed: u64) -> Vec<Aabb> {
 }
 
 fn test_frustum() -> Frustum {
-    let proj = Mat4::perspective_rh_gl(70.0_f32.to_radians(), 1.0, 0.1, 100.0);
-    let view = Mat4::look_at_rh(Vec3::new(0.0, 0.0, 5.0), Vec3::ZERO, Vec3::Y);
+    let proj = opengl::perspective(70.0_f32.to_radians(), 1.0, 0.1, 100.0);
+    let view = view::look_at_mat4(Vec3::new(0.0, 0.0, 5.0), Vec3::ZERO, Vec3::Y);
     Frustum::from_view_proj(proj * view)
 }
 

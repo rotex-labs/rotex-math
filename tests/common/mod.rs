@@ -1,9 +1,10 @@
 #![allow(dead_code)]
 
 use proptest::prelude::*;
+use rotex_math::Vec3;
 use rotex_math::frustum::{Frustum, Plane};
 use rotex_math::geometry::{Aabb, Ray3D};
-use rotex_math::{Mat4, Vec3};
+use rotex_math::glam::camera::rh::{proj::opengl, view};
 
 pub fn vec3_strategy() -> impl Strategy<Value = Vec3> {
     (any::<f32>(), any::<f32>(), any::<f32>()).prop_map(|(x, y, z)| Vec3::new(x, y, z))
@@ -48,8 +49,8 @@ pub fn plane_strategy() -> impl Strategy<Value = Plane> {
 
 pub fn frustum_strategy() -> impl Strategy<Value = Frustum> {
     (30.0f32..=120.0, 0.01f32..=0.5, 10.0f32..=100.0).prop_map(|(fov_y, z_near, z_far)| {
-        let proj = Mat4::perspective_rh_gl(fov_y.to_radians(), 1.0, z_near, z_far);
-        let view = Mat4::look_at_rh(Vec3::new(0.0, 0.0, 5.0), Vec3::ZERO, Vec3::Y);
+        let proj = opengl::perspective(fov_y.to_radians(), 1.0, z_near, z_far);
+        let view = view::look_at_mat4(Vec3::new(0.0, 0.0, 5.0), Vec3::ZERO, Vec3::Y);
         Frustum::from_view_proj(proj * view)
     })
 }

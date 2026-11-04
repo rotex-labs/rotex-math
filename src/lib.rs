@@ -12,10 +12,11 @@
 //! # Examples
 //!
 //! ```rust
-//! use rotex_math::{Vec3, Mat4, Frustum, Aabb};
+//! use rotex_math::glam::camera::rh::{proj::opengl, view};
+//! use rotex_math::{Aabb, Frustum, Vec3};
 //!
-//! let vp = Mat4::perspective_rh_gl(70.0_f32.to_radians(), 1.0, 0.1, 100.0)
-//!     * Mat4::look_at_rh(Vec3::new(0.0, 0.0, 5.0), Vec3::ZERO, Vec3::Y);
+//! let vp = opengl::perspective(70.0_f32.to_radians(), 1.0, 0.1, 100.0)
+//!     * view::look_at_mat4(Vec3::new(0.0, 0.0, 5.0), Vec3::ZERO, Vec3::Y);
 //! let frustum = Frustum::from_view_proj(vp);
 //!
 //! let aabb = Aabb::from_min_max(Vec3::splat(-0.5), Vec3::splat(0.5));
