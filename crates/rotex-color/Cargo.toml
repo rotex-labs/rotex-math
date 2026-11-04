@@ -2,6 +2,9 @@
 name = "rotex-color"
 version = "0.1.0"
 edition = "2024"
+license = "MIT"
+description = "Color space types and conversions for Rotex"
+repository = "https://github.com/rotexengine/rotex-color"
 
 [dependencies]
-rotex-math = { version = "0.1.0", path = "../rotex-math" }
+rotex-math = "0.1.0"
