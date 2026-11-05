@@ -1,7 +1,9 @@
 use crate::frustum::Frustum;
 use crate::geometry::Aabb;
+#[cfg(target_arch = "x86_64")]
 use wide::f32x8;
 
+#[cfg(target_arch = "x86_64")]
 #[target_feature(enable = "avx2")]
 unsafe fn contains_aabb_batch_impl(frustum: &Frustum, aabbs: &[Aabb], out: &mut [bool]) {
     debug_assert_eq!(aabbs.len(), out.len());
