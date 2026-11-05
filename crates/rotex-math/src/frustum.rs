@@ -18,7 +18,9 @@ use crate::{Mat4, Vec3};
 /// ```
 #[derive(Debug, Clone, Copy)]
 pub struct Plane {
+    /// Unit normal pointing toward the positive half-space.
     pub normal: Vec3,
+    /// Signed distance from the origin along [`Self::normal`].
     pub distance: f32,
 }
 
@@ -129,6 +131,7 @@ impl Plane {
 /// ```
 #[derive(Debug, Clone)]
 pub struct Frustum {
+    /// The six clipping planes. A point inside the frustum is on the positive side of each one.
     pub planes: [Plane; 6],
 }
 
@@ -251,6 +254,7 @@ impl Frustum {
     /// assert!(out[0]);
     /// ```
     #[cfg(feature = "wide-simd")]
+    #[cfg_attr(docsrs, doc(cfg(feature = "wide-simd")))]
     pub fn contains_aabb_batch(&self, aabbs: &[Aabb], out: &mut [bool]) {
         debug_assert_eq!(aabbs.len(), out.len());
 

@@ -1,18 +1,31 @@
+//! sRGB colors with a separate alpha channel.
+//!
+//! Components stay in the sRGB encoding. Convert to [`LinearRgba`] with [`From`].
+
 use crate::LinearRgba;
 
+/// sRGB color with a separate alpha channel.
+///
+/// [`Srgba::new`] keeps values outside `0.0..=1.0`. [`Srgba::to_hex`] clamps them.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Srgba {
+    /// Red channel in sRGB encoding.
     pub r: f32,
+    /// Green channel in sRGB encoding.
     pub g: f32,
+    /// Blue channel in sRGB encoding.
     pub b: f32,
+    /// Alpha. `0.0` is transparent and `1.0` is opaque.
     pub a: f32,
 }
 
 impl Srgba {
+    /// Creates a color from sRGB channel values.
     pub fn new(r: f32, g: f32, b: f32, a: f32) -> Self {
         Self { r, g, b, a }
     }
 
+    /// Decodes the low 24 bits of `hex` as `0xRRGGBB` and sets alpha to `1.0`.
     pub fn from_hex(hex: u32) -> Self {
         let r = ((hex >> 16) & 0xFF) as f32 / 255.0;
         let g = ((hex >> 8) & 0xFF) as f32 / 255.0;
@@ -20,6 +33,9 @@ impl Srgba {
         Self { r, g, b, a: 1.0 }
     }
 
+    /// Encodes the clamped red, green, and blue channels as `0xRRGGBB`.
+    ///
+    /// Alpha is omitted.
     pub fn to_hex(&self) -> u32 {
         let r = (self.r.clamp(0.0, 1.0) * 255.0).round() as u32;
         let g = (self.g.clamp(0.0, 1.0) * 255.0).round() as u32;
@@ -27,276 +43,322 @@ impl Srgba {
         (r << 16) | (g << 8) | b
     }
 
+    /// The sRGB color `white`.
     pub const WHITE: Self = Self {
         r: 1.0,
         g: 1.0,
         b: 1.0,
         a: 1.0,
     };
+    /// The sRGB color `black`.
     pub const BLACK: Self = Self {
         r: 0.0,
         g: 0.0,
         b: 0.0,
         a: 1.0,
     };
+    /// The sRGB color `red`.
     pub const RED: Self = Self {
         r: 1.0,
         g: 0.0,
         b: 0.0,
         a: 1.0,
     };
+    /// The sRGB color `green`.
     pub const GREEN: Self = Self {
         r: 0.0,
         g: 1.0,
         b: 0.0,
         a: 1.0,
     };
+    /// The sRGB color `blue`.
     pub const BLUE: Self = Self {
         r: 0.0,
         g: 0.0,
         b: 1.0,
         a: 1.0,
     };
+    /// The sRGB color `yellow`.
     pub const YELLOW: Self = Self {
         r: 1.0,
         g: 1.0,
         b: 0.0,
         a: 1.0,
     };
+    /// The sRGB color `cyan`.
     pub const CYAN: Self = Self {
         r: 0.0,
         g: 1.0,
         b: 1.0,
         a: 1.0,
     };
+    /// The sRGB color `magenta`.
     pub const MAGENTA: Self = Self {
         r: 1.0,
         g: 0.0,
         b: 1.0,
         a: 1.0,
     };
+    /// The sRGB color `gray`.
     pub const GRAY: Self = Self {
         r: 0.501961,
         g: 0.501961,
         b: 0.501961,
         a: 1.0,
     };
+    /// The sRGB color `light gray`.
     pub const LIGHT_GRAY: Self = Self {
         r: 0.827451,
         g: 0.827451,
         b: 0.827451,
         a: 1.0,
     };
+    /// The sRGB color `dark gray`.
     pub const DARK_GRAY: Self = Self {
         r: 0.25098,
         g: 0.25098,
         b: 0.25098,
         a: 1.0,
     };
+    /// The sRGB color `silver`.
     pub const SILVER: Self = Self {
         r: 0.752941,
         g: 0.752941,
         b: 0.752941,
         a: 1.0,
     };
+    /// The sRGB color `orange`.
     pub const ORANGE: Self = Self {
         r: 1.0,
         g: 0.647059,
         b: 0.0,
         a: 1.0,
     };
+    /// The sRGB color `gold`.
     pub const GOLD: Self = Self {
         r: 1.0,
         g: 0.843137,
         b: 0.0,
         a: 1.0,
     };
+    /// The sRGB color `coral`.
     pub const CORAL: Self = Self {
         r: 1.0,
         g: 0.498039,
         b: 0.313725,
         a: 1.0,
     };
+    /// The sRGB color `crimson`.
     pub const CRIMSON: Self = Self {
         r: 0.862745,
         g: 0.078431,
         b: 0.235294,
         a: 1.0,
     };
+    /// The sRGB color `tomato`.
     pub const TOMATO: Self = Self {
         r: 1.0,
         g: 0.388235,
         b: 0.278431,
         a: 1.0,
     };
+    /// The sRGB color `salmon`.
     pub const SALMON: Self = Self {
         r: 0.980392,
         g: 0.501961,
         b: 0.447059,
         a: 1.0,
     };
+    /// The sRGB color `hot pink`.
     pub const HOT_PINK: Self = Self {
         r: 1.0,
         g: 0.411765,
         b: 0.705882,
         a: 1.0,
     };
+    /// The sRGB color `dark orange`.
     pub const DARK_ORANGE: Self = Self {
         r: 1.0,
         g: 0.54902,
         b: 0.0,
         a: 1.0,
     };
+    /// The sRGB color `goldenrod`.
     pub const GOLDENROD: Self = Self {
         r: 0.854902,
         g: 0.647059,
         b: 0.12549,
         a: 1.0,
     };
+    /// The sRGB color `pink`.
     pub const PINK: Self = Self {
         r: 1.0,
         g: 0.752941,
         b: 0.796078,
         a: 1.0,
     };
+    /// The sRGB color `royal blue`.
     pub const ROYAL_BLUE: Self = Self {
         r: 0.254902,
         g: 0.411765,
         b: 0.882353,
         a: 1.0,
     };
+    /// The sRGB color `dodger blue`.
     pub const DODGER_BLUE: Self = Self {
         r: 0.117647,
         g: 0.564706,
         b: 1.0,
         a: 1.0,
     };
+    /// The sRGB color `cornflower blue`.
     pub const CORNFLOWER_BLUE: Self = Self {
         r: 0.392157,
         g: 0.584314,
         b: 0.929412,
         a: 1.0,
     };
+    /// The sRGB color `steel blue`.
     pub const STEEL_BLUE: Self = Self {
         r: 0.27451,
         g: 0.509804,
         b: 0.705882,
         a: 1.0,
     };
+    /// The sRGB color `deep sky blue`.
     pub const DEEP_SKY_BLUE: Self = Self {
         r: 0.0,
         g: 0.74902,
         b: 1.0,
         a: 1.0,
     };
+    /// The sRGB color `sky blue`.
     pub const SKY_BLUE: Self = Self {
         r: 0.529412,
         g: 0.807843,
         b: 0.921569,
         a: 1.0,
     };
+    /// The sRGB color `forest green`.
     pub const FOREST_GREEN: Self = Self {
         r: 0.133333,
         g: 0.545098,
         b: 0.133333,
         a: 1.0,
     };
+    /// The sRGB color `sea green`.
     pub const SEA_GREEN: Self = Self {
         r: 0.180392,
         g: 0.545098,
         b: 0.341176,
         a: 1.0,
     };
+    /// The sRGB color `lime green`.
     pub const LIME_GREEN: Self = Self {
         r: 0.196078,
         g: 0.803922,
         b: 0.196078,
         a: 1.0,
     };
+    /// The sRGB color `olive`.
     pub const OLIVE: Self = Self {
         r: 0.501961,
         g: 0.501961,
         b: 0.0,
         a: 1.0,
     };
+    /// The sRGB color `brown`.
     pub const BROWN: Self = Self {
         r: 0.647059,
         g: 0.164706,
         b: 0.164706,
         a: 1.0,
     };
+    /// The sRGB color `chocolate`.
     pub const CHOCOLATE: Self = Self {
         r: 0.823529,
         g: 0.411765,
         b: 0.117647,
         a: 1.0,
     };
+    /// The sRGB color `sandy brown`.
     pub const SANDY_BROWN: Self = Self {
         r: 0.956863,
         g: 0.643137,
         b: 0.376471,
         a: 1.0,
     };
+    /// The sRGB color `purple`.
     pub const PURPLE: Self = Self {
         r: 0.501961,
         g: 0.0,
         b: 0.501961,
         a: 1.0,
     };
+    /// The sRGB color `violet`.
     pub const VIOLET: Self = Self {
         r: 0.933333,
         g: 0.509804,
         b: 0.933333,
         a: 1.0,
     };
+    /// The sRGB color `indigo`.
     pub const INDIGO: Self = Self {
         r: 0.294118,
         g: 0.0,
         b: 0.509804,
         a: 1.0,
     };
+    /// The sRGB color `medium purple`.
     pub const MEDIUM_PURPLE: Self = Self {
         r: 0.576471,
         g: 0.439216,
         b: 0.858824,
         a: 1.0,
     };
+    /// The sRGB color `slate blue`.
     pub const SLATE_BLUE: Self = Self {
         r: 0.415686,
         g: 0.352941,
         b: 0.803922,
         a: 1.0,
     };
+    /// The sRGB color `dark slate blue`.
     pub const DARK_SLATE_BLUE: Self = Self {
         r: 0.282353,
         g: 0.239216,
         b: 0.545098,
         a: 1.0,
     };
+    /// The sRGB color `navy`.
     pub const NAVY: Self = Self {
         r: 0.0,
         g: 0.0,
         b: 0.501961,
         a: 1.0,
     };
+    /// The sRGB color `teal`.
     pub const TEAL: Self = Self {
         r: 0.0,
         g: 0.501961,
         b: 0.501961,
         a: 1.0,
     };
+    /// The sRGB color `turquoise`.
     pub const TURQUOISE: Self = Self {
         r: 0.25098,
         g: 0.878431,
         b: 0.815686,
         a: 1.0,
     };
+    /// The sRGB color `dark turquoise`.
     pub const DARK_TURQUOISE: Self = Self {
         r: 0.0,
         g: 0.807843,
         b: 0.819608,
         a: 1.0,
     };
+    /// The sRGB color `maroon`.
     pub const MAROON: Self = Self {
         r: 0.501961,
         g: 0.0,

@@ -14,7 +14,9 @@ use crate::{Vec2, Vec3};
 /// ```
 #[derive(Debug, Clone, Copy)]
 pub struct Aabb {
+    /// Corner with the smallest x, y, and z.
     pub min: Vec3,
+    /// Corner with the largest x, y, and z.
     pub max: Vec3,
 }
 
@@ -183,7 +185,9 @@ impl Aabb {
 /// ```
 #[derive(Debug, Clone, Copy)]
 pub struct Aabb2 {
+    /// Corner with the smallest x and y.
     pub min: Vec2,
+    /// Corner with the largest x and y.
     pub max: Vec2,
 }
 
@@ -255,7 +259,9 @@ impl Aabb2 {
 /// ```
 #[derive(Debug, Clone, Copy)]
 pub struct Ray3D {
+    /// Point where the parameter `t` is `0`.
     pub origin: Vec3,
+    /// Direction multiplied by `t`. Not required to be a unit vector.
     pub direction: Vec3,
 }
 
@@ -308,7 +314,9 @@ impl Ray3D {
 /// A 2D ray. The 2D counterpart of [`Ray3D`].
 #[derive(Debug, Clone, Copy)]
 pub struct Ray2D {
+    /// Point where the parameter `t` is `0`.
     pub origin: Vec2,
+    /// Direction multiplied by `t`. Not required to be a unit vector.
     pub direction: Vec2,
 }
 
@@ -333,7 +341,9 @@ impl Ray2D {
 /// A 3D line segment defined by two endpoints.
 #[derive(Debug, Clone, Copy)]
 pub struct LineSegment3D {
+    /// First endpoint.
     pub a: Vec3,
+    /// Second endpoint.
     pub b: Vec3,
 }
 
@@ -347,7 +357,9 @@ impl LineSegment3D {
 /// A 2D line segment. The 2D counterpart of [`LineSegment3D`].
 #[derive(Debug, Clone, Copy)]
 pub struct LineSegment2D {
+    /// First endpoint.
     pub a: Vec2,
+    /// Second endpoint.
     pub b: Vec2,
 }
 

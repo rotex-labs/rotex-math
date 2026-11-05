@@ -1,3 +1,6 @@
+#![deny(missing_docs)]
+#![deny(rustdoc::broken_intra_doc_links)]
+
 //! Linear algebra, spatial geometry, and frustum culling for the Rotex engine.
 //!
 //! This crate re-exports all [`glam`] types at the crate root so you can write
@@ -23,7 +26,9 @@
 //! assert!(frustum.contains_aabb(&aabb));
 //! ```
 
+/// The [`glam`] crate, re-exported for module paths such as `glam::camera`.
 pub use glam;
+
 /// Re-exported [`glam`] types for direct access at the crate root.
 ///
 /// | Category | 2D | 3D | 4D |
@@ -69,5 +74,7 @@ pub mod frustum;
 /// SIMD-batched frustum culling (requires `wide-simd` feature).
 pub mod wide_simd;
 
+/// [`Frustum`] and [`Plane`] at the crate root.
 pub use frustum::{Frustum, Plane};
+/// Bounding boxes, rays, and line segments at the crate root.
 pub use geometry::{Aabb, Aabb2, LineSegment2D, LineSegment3D, Ray2D, Ray3D};

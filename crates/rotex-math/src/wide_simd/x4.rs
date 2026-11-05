@@ -14,6 +14,7 @@ use wide::f32x4;
 /// # Panics
 ///
 /// Panics if `aabbs.len() != out.len()` in debug builds.
+#[cfg_attr(docsrs, doc(cfg(feature = "wide-simd")))]
 pub fn contains_aabb_batch(frustum: &Frustum, aabbs: &[Aabb], out: &mut [bool]) {
     debug_assert_eq!(aabbs.len(), out.len());
 
