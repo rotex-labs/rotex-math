@@ -76,6 +76,7 @@ unsafe fn contains_aabb_batch_impl(frustum: &Frustum, aabbs: &[Aabb], out: &mut 
 /// # Panics
 ///
 /// Panics if `aabbs.len() != out.len()` in debug builds.
+#[cfg_attr(docsrs, doc(cfg(feature = "wide-simd")))]
 pub fn contains_aabb_batch(frustum: &Frustum, aabbs: &[Aabb], out: &mut [bool]) {
     #[cfg(target_arch = "x86_64")]
     {

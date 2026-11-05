@@ -1,289 +1,347 @@
+//! Hue, saturation, and value colors.
+//!
+//! Hue is in degrees. Convert to [`LinearRgba`] with [`From`].
+
 use crate::LinearRgba;
 use rotex_math::Vec4;
 
+/// Hue, saturation, and value, with a separate alpha channel.
+///
+/// Hue is in degrees. Saturation and value are typically in `0.0..=1.0`.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Hsva {
+    /// Hue in degrees.
     pub h: f32,
+    /// Saturation. `0.0` is gray and `1.0` is fully saturated.
     pub s: f32,
+    /// Value. `0.0` is black and `1.0` is the brightest color at this saturation.
     pub v: f32,
+    /// Alpha. `0.0` is transparent and `1.0` is opaque.
     pub a: f32,
 }
 
 impl Hsva {
+    /// Creates an HSV color. `h` is degrees.
     pub fn new(h: f32, s: f32, v: f32, a: f32) -> Self {
         Self { h, s, v, a }
     }
 
+    /// The HSV color `white`.
     pub const WHITE: Self = Self {
         h: 0.0,
         s: 0.0,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `black`.
     pub const BLACK: Self = Self {
         h: 0.0,
         s: 0.0,
         v: 0.0,
         a: 1.0,
     };
+    /// The HSV color `red`.
     pub const RED: Self = Self {
         h: 0.0,
         s: 1.0,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `green`.
     pub const GREEN: Self = Self {
         h: 120.0,
         s: 1.0,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `blue`.
     pub const BLUE: Self = Self {
         h: 240.0,
         s: 1.0,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `yellow`.
     pub const YELLOW: Self = Self {
         h: 60.0,
         s: 1.0,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `cyan`.
     pub const CYAN: Self = Self {
         h: 180.0,
         s: 1.0,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `magenta`.
     pub const MAGENTA: Self = Self {
         h: 300.0,
         s: 1.0,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `gray`.
     pub const GRAY: Self = Self {
         h: 0.0,
         s: 0.0,
         v: 0.215861,
         a: 1.0,
     };
+    /// The HSV color `light gray`.
     pub const LIGHT_GRAY: Self = Self {
         h: 0.0,
         s: 0.0,
         v: 0.651406,
         a: 1.0,
     };
+    /// The HSV color `dark gray`.
     pub const DARK_GRAY: Self = Self {
         h: 0.0,
         s: 0.0,
         v: 0.051269,
         a: 1.0,
     };
+    /// The HSV color `silver`.
     pub const SILVER: Self = Self {
         h: 0.0,
         s: 0.0,
         v: 0.527115,
         a: 1.0,
     };
+    /// The HSV color `orange`.
     pub const ORANGE: Self = Self {
         h: 22.575727,
         s: 1.0,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `gold`.
     pub const GOLD: Self = Self {
         h: 40.772548,
         s: 1.0,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `coral`.
     pub const CORAL: Self = Self {
         h: 8.611467,
         s: 0.91978,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `crimson`.
     pub const CRIMSON: Self = Self {
         h: 356.76668,
         s: 0.990226,
         v: 0.715694,
         a: 1.0,
     };
+    /// The HSV color `tomato`.
     pub const TOMATO: Self = Self {
         h: 3.954907,
         s: 0.93699,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `salmon`.
     pub const SALMON: Self = Self {
         h: 3.62505,
         s: 0.823981,
         v: 0.955973,
         a: 1.0,
     };
+    /// The HSV color `hot pink`.
     pub const HOT_PINK: Self = Self {
         h: 337.980604,
         s: 0.858737,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `dark orange`.
     pub const DARK_ORANGE: Self = Self {
         h: 15.735039,
         s: 1.0,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `goldenrod`.
     pub const GOLDENROD: Self = Self {
         h: 31.615586,
         s: 0.979398,
         v: 0.701102,
         a: 1.0,
     };
+    /// The HSV color `pink`.
     pub const PINK: Self = Self {
         h: 351.10735,
         s: 0.472885,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `royal blue`.
     pub const ROYAL_BLUE: Self = Self {
         h: 232.423513,
         s: 0.929795,
         v: 0.752942,
         a: 1.0,
     };
+    /// The HSV color `dodger blue`.
     pub const DODGER_BLUE: Self = Self {
         h: 223.835461,
         s: 0.987017,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `cornflower blue`.
     pub const CORNFLOWER_BLUE: Self = Self {
         h: 225.563173,
         s: 0.84952,
         v: 0.846873,
         a: 1.0,
     };
+    /// The HSV color `steel blue`.
     pub const STEEL_BLUE: Self = Self {
         h: 215.405426,
         s: 0.865809,
         v: 0.456411,
         a: 1.0,
     };
+    /// The HSV color `deep sky blue`.
     pub const DEEP_SKY_BLUE: Self = Self {
         h: 208.740266,
         s: 1.0,
         v: 1.0,
         a: 1.0,
     };
+    /// The HSV color `sky blue`.
     pub const SKY_BLUE: Self = Self {
         h: 201.774076,
         s: 0.708366,
         v: 0.83077,
         a: 1.0,
     };
+    /// The HSV color `forest green`.
     pub const FOREST_GREEN: Self = Self {
         h: 120.0,
         s: 0.938043,
         v: 0.258183,
         a: 1.0,
     };
+    /// The HSV color `sea green`.
     pub const SEA_GREEN: Self = Self {
         h: 137.669409,
         s: 0.89418,
         v: 0.258183,
         a: 1.0,
     };
+    /// The HSV color `lime green`.
     pub const LIME_GREEN: Self = Self {
         h: 120.0,
         s: 0.947754,
         v: 0.610496,
         a: 1.0,
     };
+    /// The HSV color `olive`.
     pub const OLIVE: Self = Self {
         h: 60.0,
         s: 1.0,
         v: 0.215861,
         a: 1.0,
     };
+    /// The HSV color `brown`.
     pub const BROWN: Self = Self {
         h: 0.0,
         s: 0.938465,
         v: 0.376262,
         a: 1.0,
     };
+    /// The HSV color `chocolate`.
     pub const CHOCOLATE: Self = Self {
         h: 12.188213,
         s: 0.979855,
         v: 0.64448,
         a: 1.0,
     };
+    /// The HSV color `sandy brown`.
     pub const SANDY_BROWN: Self = Self {
         h: 19.368039,
         s: 0.870702,
         v: 0.904661,
         a: 1.0,
     };
+    /// The HSV color `purple`.
     pub const PURPLE: Self = Self {
         h: 300.0,
         s: 1.0,
         v: 0.215861,
         a: 1.0,
     };
+    /// The HSV color `violet`.
     pub const VIOLET: Self = Self {
         h: 300.0,
         s: 0.738912,
         v: 0.854993,
         a: 1.0,
     };
+    /// The HSV color `indigo`.
     pub const INDIGO: Self = Self {
         h: 258.911635,
         s: 1.0,
         v: 0.223228,
         a: 1.0,
     };
+    /// The HSV color `medium purple`.
     pub const MEDIUM_PURPLE: Self = Self {
         h: 254.248243,
         s: 0.771266,
         v: 0.708376,
         a: 1.0,
     };
+    /// The HSV color `slate blue`.
     pub const SLATE_BLUE: Self = Self {
         h: 244.944782,
         s: 0.832527,
         v: 0.610496,
         a: 1.0,
     };
+    /// The HSV color `dark slate blue`.
     pub const DARK_SLATE_BLUE: Self = Self {
         h: 245.145151,
         s: 0.819256,
         v: 0.258183,
         a: 1.0,
     };
+    /// The HSV color `navy`.
     pub const NAVY: Self = Self {
         h: 240.0,
         s: 1.0,
         v: 0.215861,
         a: 1.0,
     };
+    /// The HSV color `teal`.
     pub const TEAL: Self = Self {
         h: 180.0,
         s: 1.0,
         v: 0.215861,
         a: 1.0,
     };
+    /// The HSV color `turquoise`.
     pub const TURQUOISE: Self = Self {
         h: 170.090073,
         s: 0.931219,
         v: 0.745404,
         a: 1.0,
     };
+    /// The HSV color `dark turquoise`.
     pub const DARK_TURQUOISE: Self = Self {
         h: 181.918797,
         s: 1.0,
         v: 0.637597,
         a: 1.0,
     };
+    /// The HSV color `maroon`.
     pub const MAROON: Self = Self {
         h: 0.0,
         s: 1.0,

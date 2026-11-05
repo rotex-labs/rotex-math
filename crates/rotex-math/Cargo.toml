@@ -4,7 +4,12 @@ version = "0.1.0"
 edition = "2024"
 license = "MIT OR Apache-2.0"
 description = "Mathematical utilities for rotexengine development"
+documentation = "https://docs.rs/rotex-math"
 repository = "https://github.com/rotex-labs/rotex-math"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
 
 [dependencies]
 glam = "0.33.12"

@@ -1,15 +1,25 @@
+//! CIE XYZ colors under a D65 white point, with a separate alpha channel.
+//!
+//! Convert to [`LinearRgba`] with [`From`].
+
 use crate::LinearRgba;
 use rotex_math::Vec4;
 
+/// CIE XYZ tristimulus values under D65, with a separate alpha channel.
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Xyza {
+    /// CIE X tristimulus value.
     pub x: f32,
+    /// CIE Y tristimulus value. This is the relative luminance.
     pub y: f32,
+    /// CIE Z tristimulus value.
     pub z: f32,
+    /// Alpha. `0.0` is transparent and `1.0` is opaque.
     pub a: f32,
 }
 
 impl Xyza {
+    /// Creates an XYZ color from tristimulus values and alpha.
     pub fn new(x: f32, y: f32, z: f32, a: f32) -> Self {
         Self { x, y, z, a }
     }
